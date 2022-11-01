@@ -1,0 +1,46 @@
+{{!-- ./views/index.handlebars --}}
+<div class="container mt-5">
+  {{!-- sorting drop down --}}
+  <div class="form-group">
+    <form action="/">
+      <select name="sort" id="sort" oninput="form.submit()" class="btn btn-secondary dropdown-toggle">
+        <option value="0">Sort</option>
+        <option value="1">A->Z</option>
+        <option value="2">Z->A</option>
+        <option value="3">類別</option>
+        <option value="4">地區</option>
+      </select>
+    </form>
+  </div>
+  <div>
+    <span>Total Amount:</span>
+  </div>
+  <!-- record list -->
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-10 col-12 mx-auto">
+        <ul class="list-group-item">
+          {{#each records}}
+          <li class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-auto me-auto">
+                <h4 style="display: inline; vertical-align:middle;"> {{this.name}} </h4>
+              </div>
+              <div class="col-auto">
+                <a class="btn btn-success" href="./records/{{ this._id }}/edit">edit</a>
+                <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display:inline;">
+                  <button class="btn btn-danger" type="submit">delete</button>
+                </form>
+              </div>
+            </div>
+          </li>
+          {{/each}}
+        </ul>
+        <div>
+          <p>預計表格位置</p>
+        </div>
+        <a href="./records/new"> <button class="btn btn-info mb-3">新增支出</button> </a>
+      </div>
+    </div>
+  </div>
+</div>
