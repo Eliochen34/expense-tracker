@@ -10,6 +10,10 @@ const categorySchema = new Schema({
     type: String,
     required: true
   },
+  iconType: {
+    type: String,
+    required: true
+  },
   creatAt: {
     type: Date,
     default: Date.now

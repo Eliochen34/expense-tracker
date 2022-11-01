@@ -31,38 +31,38 @@ router.get('/:restaurant_id', (req, res) => {
     })
 })
 
-// 編輯餐廳功能頁面
-router.get('/:restaurant_id/edit', (req, res) => {
-  const _id = req.params.restaurant_id
+// 編輯頁面
+router.get('/:record_id/edit', (req, res) => {
+  const _id = req.params.record_id
   const userId = req.user._id
-  return Restaurant.findOne({ _id, userId })
+  return Record.findOne({ _id, userId })
     .lean()
-    .then(restaurant => res.render('edit', { restaurant }))
+    .then(record => res.render('edit', { record }))
     .catch(err => {
       console.log(err)
       res.render('error')
     })
 })
 
-// 更新餐廳功能
-router.put('/:restaurant_id', (req, res) => {
-  const _id = req.params.restaurant_id
+// 更新功能
+router.put('/:record_id', (req, res) => {
+  const _id = req.params.record_id
   const userId = req.user._id
 
-  return Restaurant.findByIdAndUpdate({ _id, userId }, req.body)
-    .then(() => res.redirect(`/restaurants/${req.params.restaurant_id}`))
+  return Record.findByIdAndUpdate({ _id, userId }, req.body)
+    .then(() => res.redirect('/'))
     .catch(err => {
       console.log(err)
       res.render('error')
     })
 })
 
-// 刪除餐廳功能
-router.delete('/:restaurant_id', (req, res) => {
-  const _id = req.params.restaurant_id
+// 刪除功能
+router.delete('/:record_id', (req, res) => {
+  const _id = req.params.record_id
   const userId = req.user._id
 
-  return Restaurant.findByIdAndDelete({ _id, userId })
+  return Record.findByIdAndDelete({ _id, userId })
     .then(() => res.redirect('/'))
     .catch(err => {
       console.log(err)

@@ -24,7 +24,12 @@
           <li class="list-group-item">
             <div class="row align-items-center">
               <div class="col-auto me-auto">
+                <i class="fa-solid fa-{{this.categoryId}}"></i>
                 <h4 style="display: inline; vertical-align:middle;"> {{this.name}} </h4>
+                <small class="date text-muted"> {{this.date}} </small>
+              </div>
+              <div class="col-auto">
+                <p>{{this.amount}}</p>
               </div>
               <div class="col-auto">
                 <a class="btn btn-success" href="./records/{{ this._id }}/edit">edit</a>
@@ -36,10 +41,7 @@
           </li>
           {{/each}}
         </ul>
-        <div>
-          <p>預計表格位置</p>
-        </div>
-        <a href="./records/new"> <button class="btn btn-info mb-3">新增支出</button> </a>
+        <a href="/records/new"> <button class="btn btn-info mb-3">新增支出</button> </a>
       </div>
     </div>
   </div>

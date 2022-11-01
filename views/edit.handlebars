@@ -1,0 +1,45 @@
+<div class="container">
+  <form action="/records/{{record._id}}?_method=PUT" method="POST">
+    <div class="d-flex mb-3">
+      <div id="formHelp" class="form-text p-3 mb-3">*必填欄位</div>
+      <div class="p-2 flex-grow-1">
+        <h3 class="text-center">請修改你的支出</h3>
+      </div>
+    </div>
+
+    <div class="d-flex mb-3">
+      <label for="name" class="form-label w-25 p-2 text-center">名稱*：</label>
+      <input type="text" class="form-control p-2 flex-grow-1" id="name" aria-describedby="name" placeholder="名稱"
+        name="name" value="{{record.name}}" required>
+    </div>
+
+    <div class="d-flex mb-3">
+      <label for="date" class="form-label w-25 p-2 text-center">日期*：</label>
+      <input type="date" class="form-control p-2 flex-grow-1" id="date" aria-describedby="date" placeholder="date"
+        name="date" value="record.date" required>
+    </div>
+
+    <div class="d-flex mb-3">
+      <label for="category" class="form-label w-25 p-2 text-center">類別*：</label>
+      <select class="form-select p-2 flex-grow-1" aria-label="category" name="categoryId" id="category" required>
+        <option selected disabled value="{{record.categoryId}}">選擇類別</option>
+        <option value="1">家居物業</option>
+        <option value="2">交通出行</option>
+        <option value="3">休閒娛樂</option>
+        <option value="4">餐飲食品</option>
+        <option value="5">其他</option>
+      </select>
+    </div>
+
+    <div class="d-flex mb-5">
+      <label for="amount" class="form-label w-25 p-2 text-center">金額*：</label>
+      <input type="number" class="form-control p-2 flex-grow-1" id="amount" aria-describedby="amount" placeholder="金額"
+        name="amount" value="{{record.amount}}" required>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn btn-warning m-3">修改支出</button>
+      <a href="/" class="btn btn-outline-danger m-3">回上一頁</a>
+    </div>
+  </form>
+</div>
