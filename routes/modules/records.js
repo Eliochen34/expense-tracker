@@ -18,18 +18,18 @@ router.post('/', (req, res) => {
     })
 })
 
-// 檢視單一餐廳
-router.get('/:restaurant_id', (req, res) => {
-  const _id = req.params.restaurant_id
-  const userId = req.user._id
-  return Restaurant.findOne({ _id, userId })
-    .lean()
-    .then(restaurant => res.render('show', { restaurant }))
-    .catch(err => {
-      console.log(err)
-      res.render('error')
-    })
-})
+// 檢視單一支出
+// router.get('/:restaurant_id', (req, res) => {
+//   const _id = req.params.restaurant_id
+//   const userId = req.user._id
+//   return Restaurant.findOne({ _id, userId })
+//     .lean()
+//     .then(restaurant => res.render('show', { restaurant }))
+//     .catch(err => {
+//       console.log(err)
+//       res.render('error')
+//     })
+// })
 
 // 編輯頁面
 router.get('/:record_id/edit', (req, res) => {
