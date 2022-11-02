@@ -1,19 +1,20 @@
 {{!-- ./views/index.handlebars --}}
-<div class="container mt-5">
+<div class="container mt-5 text-center">
   {{!-- sorting drop down --}}
   <div class="form-group">
-    <form action="/">
+    <form action="/category" method="POST">
       <select name="sort" id="sort" oninput="form.submit()" class="btn btn-secondary dropdown-toggle">
-        <option value="0">Sort</option>
-        <option value="1">A->Z</option>
-        <option value="2">Z->A</option>
-        <option value="3">類別</option>
-        <option value="4">地區</option>
+        <option disabled selected>Sort</option>
+        <option value="1">家居物業</option>
+        <option value="2">交通出行</option>
+        <option value="3">休閒娛樂</option>
+        <option value="4">餐飲食品</option>
+        <option value="5">其他</option>
       </select>
     </form>
   </div>
   <div>
-    <span>Total Amount:</span>
+    <p>Total Amount:<b>{{totalAmount}}</p>
   </div>
   <!-- record list -->
   <div class="container mt-5">

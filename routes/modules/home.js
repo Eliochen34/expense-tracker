@@ -8,7 +8,13 @@ router.get('/', (req, res) => {
   Records.find({ userId })
     .lean()
     // .sort(sorting(req.query.sort))
-    .then(records => res.render('index', { records }))
+    .then(records => {
+      let totalAmount = 0
+      for (let i = 0; i < records.length; i++){
+        totalAmount += records[i].amount
+      }
+      res.render('index', { records, totalAmount })
+    })
     .catch(err => {
       console.log(err)
       res.render('error')
