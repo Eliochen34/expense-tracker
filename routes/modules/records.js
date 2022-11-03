@@ -1,10 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const Record = require('../../models/record')
+const Category = require('../../models/category')
 
 // 新增頁面
 router.get('/new', (req, res) => {
-  return res.render('new')
+  Category.find()
+    .lean()
+    .then(categories => {
+      res.render('new', {categories})
+    })
 })
 
 // 新增功能
@@ -35,12 +40,20 @@ router.post('/', (req, res) => {
 router.get('/:record_id/edit', (req, res) => {
   const _id = req.params.record_id
   const userId = req.user._id
-  return Record.findOne({ _id, userId })
+  const categories = []
+  Category.find()
     .lean()
-    .then(record => res.render('edit', { record }))
-    .catch(err => {
-      console.log(err)
-      res.render('error')
+    .then(category => {
+      categories.push(...category)
+    })
+    .then(() => {
+      Record.findOne({ _id, userId })
+        .lean()
+        .then(record => res.render('edit', { record, categories }))
+        .catch(err => {
+          console.log(err)
+          res.render('error')
+        })
     })
 })
 

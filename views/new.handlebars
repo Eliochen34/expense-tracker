@@ -23,11 +23,9 @@
       <label for="category" class="form-label w-25 p-2 text-center">類別*：</label>
       <select class="form-select p-2 flex-grow-1" aria-label="category" name="categoryId" id="category" required>
         <option selected disabled value="">選擇類別</option>
-        <option value="1">家居物業</option>
-        <option value="2">交通出行</option>
-        <option value="3">休閒娛樂</option>
-        <option value="4">餐飲食品</option>
-        <option value="5">其他</option>
+        {{#each categories}}
+        <option value="{{this._id}}" {{#if this.selected}}selected{{/if}}>{{this.name}}</option>
+        {{/each}}
       </select>
     </div>
     

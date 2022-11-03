@@ -30,25 +30,25 @@ const SEED_RECORDS = [
     name: "早餐",
     date: "2022-11-2",
     amount: "55",
-    categoryId: 4
+    categoryId: "636344842e0a9d4b10449a09"
   },
   {
     name: "公車費",
     date: "2022-11-2",
     amount: 12,
-    categoryId: 2
+    categoryId: "636344842e0a9d4b10449a0a"
   },
   {
     name: "晚餐",
     date: "2022-11-2",
     amount: 300,
-    categoryId: 4
+    categoryId: "636344842e0a9d4b10449a09"
   },
   {
     name: "買傢俱",
     date: "2022-10-15",
     amount: 3500,
-    categoryId: 1
+    categoryId: "636344842e0a9d4b10449a07"
   }
 ]
 
