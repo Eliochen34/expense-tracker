@@ -1,8 +1,8 @@
 {{!-- ./views/index.handlebars --}}
 <div class="container mt-5 text-center">
   {{!-- sorting drop down --}}
-  <div class="form-group">
-    <form action="/category" method="POST">
+  <div class="d-flex justify-content-center">
+    <form action="/category" method="POST" class="m-3">
       <select name="sort" id="sort" oninput="form.submit()" class="btn btn-secondary dropdown-toggle">
         <option disabled selected>Sort</option>
         <option value="1">家居物業</option>
@@ -12,9 +12,11 @@
         <option value="5">其他</option>
       </select>
     </form>
+    <a href="/" class="btn btn-outline-danger m-3">Clean Sort</a>
   </div>
+  
   <div>
-    <p>Total Amount:<b>{{totalAmount}}</p>
+    <p>Total Amount:<b class="fs-1 text-info">{{ totalAmount }} </b></p>
   </div>
   <!-- record list -->
   <div class="container mt-5">
@@ -27,7 +29,7 @@
               <div class="col-auto me-auto">
                 <i class="fa-solid fa-{{this.categoryId}}"></i>
                 <h4 style="display: inline; vertical-align:middle;"> {{this.name}} </h4>
-                <small class="date text-muted"> {{this.date}} </small>
+                <small class="date text-muted"> {{ dateHandler this.date}} </small>
               </div>
               <div class="col-auto">
                 <p>{{this.amount}}</p>

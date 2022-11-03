@@ -17,7 +17,15 @@ require('./config/mongoose')
 const app = express()
 const port = 3000
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.engine('handlebars', exphbs({
+   defaultLayout: 'main',
+   helpers: { //helpers參考同學做法
+     dateHandler(date){
+       let withoutTime = new Date(date).toLocaleDateString() // 參考網路資料https://ithelp.ithome.com.tw/articles/10283567
+       return withoutTime
+     }
+   } 
+  }))
 app.set('view engine', 'handlebars')
 
 app.use(session({

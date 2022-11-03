@@ -21,6 +21,24 @@ router.get('/', (req, res) => {
     })
 })
 
+router.post('/category', (req, res) => {
+  const userId = req.user._id
+  const categoryId = req.body.sort
+  Records.find({ userId, categoryId })
+    .lean()
+    .then(records => {
+      let totalAmount = 0
+      for (let i = 0; i < records.length; i++) {
+        totalAmount += records[i].amount
+      }
+      res.render('index', { records, totalAmount })
+    })
+    .catch(err => {
+      console.log(err)
+      res.render('error')
+    })
+}) 
+
 // 關鍵字搜索餐廳
 // router.get('/search', (req, res) => {
 //   if (!req.query.keyword) {
