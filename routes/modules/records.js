@@ -48,12 +48,22 @@ router.get('/:record_id/edit', (req, res) => {
     })
     .then(() => {
       Record.findOne({ _id, userId })
+        .populate('categoryId')
         .lean()
-        .then(record => res.render('edit', { record, categories }))
-        .catch(err => {
-          console.log(err)
-          res.render('error')
+        .then(record => {
+          categories.forEach(category => {
+            if (category.name === record.categoryId.name) {
+              category.selected = true
+            }
+          })
+          // record.date = record.date.toLocaleDateString('fr-CA',
+          //   { year: 'numeric', month: '2-digit', day: '2-digit' })
+          res.render('edit', { record, categories })
         })
+    })
+    .catch(err => {
+      console.log(err)
+      res.render('error')
     })
 })
 

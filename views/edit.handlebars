@@ -21,10 +21,18 @@
 
     <div class="d-flex mb-3">
       <label for="category" class="form-label w-25 p-2 text-center">類別*：</label>
-      <select class="form-select p-2 flex-grow-1" aria-label="category" name="categoryId" id="category" required>
-        <option selected disabled value="{{record.categoryId}}">選擇類別</option>
+      
+      {{!-- <input type="text" class="form-select p-2 flex-grow-1" aria-label="category" name="category" id="category" list="categoryOptions" value="{{record.categoryId.name}}" required>
+      <datalist id="categoryOptions">
         {{#each categories}}
-        <option value="{{this._id}}" {{#if this}}selected{{/if}}>{{this.name}}</option>
+        <option value="{{this._id}}">{{this.name}}</option>
+        {{/each}}
+      </datalist> --}}
+      
+      <select class="form-select p-2 flex-grow-1" aria-label="category" name="categoryId" id="category" value="" required>
+        {{!-- <option value="">選擇類別</option> --}}
+        {{#each categories}}
+        <option value="{{this._id}}" {{#if this.selected}}selected{{/if}}>{{this.name}}</option>
         {{/each}}
       </select>
     </div>
