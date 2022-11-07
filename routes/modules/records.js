@@ -51,13 +51,15 @@ router.get('/:record_id/edit', (req, res) => {
         .populate('categoryId')
         .lean()
         .then(record => {
+          // 進入編輯頁面時，將支出類別資料標記成selected
           categories.forEach(category => {
             if (category.name === record.categoryId.name) {
               category.selected = true
             }
           })
-          // record.date = record.date.toLocaleDateString('fr-CA',
-          //   { year: 'numeric', month: '2-digit', day: '2-digit' })
+          // 進入編輯頁面時，將時間資料轉換為可顯示的格式
+          record.date = record.date.toLocaleDateString('fr-CA',
+            { year: 'numeric', month: '2-digit', day: '2-digit' })
           res.render('edit', { record, categories })
         })
     })

@@ -21,16 +21,8 @@
 
     <div class="d-flex mb-3">
       <label for="category" class="form-label w-25 p-2 text-center">類別*：</label>
-      
-      {{!-- <input type="text" class="form-select p-2 flex-grow-1" aria-label="category" name="category" id="category" list="categoryOptions" value="{{record.categoryId.name}}" required>
-      <datalist id="categoryOptions">
-        {{#each categories}}
-        <option value="{{this._id}}">{{this.name}}</option>
-        {{/each}}
-      </datalist> --}}
-      
       <select class="form-select p-2 flex-grow-1" aria-label="category" name="categoryId" id="category" value="" required>
-        {{!-- <option value="">選擇類別</option> --}}
+        {{!-- 用迴圈來渲染所有支出種類類別 --}}
         {{#each categories}}
         <option value="{{this._id}}" {{#if this.selected}}selected{{/if}}>{{this.name}}</option>
         {{/each}}

@@ -1,5 +1,6 @@
 {{!-- ./views/index.handlebars --}}
 <div class="container mt-5 text-center">
+
   {{!-- sorting drop down --}}
   <div class="d-flex justify-content-center">
     <form action="/category" method="POST" class="m-3">
@@ -8,20 +9,17 @@
         {{#each categories}}
         <option value="{{this._id}}">{{this.name}}</option>
         {{/each}}
-        {{!-- <option value="2">交通出行</option>
-        <option value="3">休閒娛樂</option>
-        <option value="4">餐飲食品</option>
-        <option value="5">其他</option> --}}
       </select>
     </form>
     <a href="/" class="btn btn-outline-danger m-3">Clean Sort</a>
   </div>
   
-  <div>
+  <div >
     <p>Total Amount:<b class="fs-1 text-info">{{ totalAmount }} </b></p>
   </div>
+
   <!-- record list -->
-  <div class="container mt-5">
+  <div class="row mb-3 mt-5">
     <div class="row">
       <div class="col-md-10 col-12 mx-auto">
         <ul class="list-group-item">
