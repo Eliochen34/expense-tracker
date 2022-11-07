@@ -44,3 +44,4 @@ Here lists the specific expense lists of login account
 - passport 0.4.1
 - passport-local 1.0.0
 - passport-facebook 3.0.0
+- mongoose 5.9.7
