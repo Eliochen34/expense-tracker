@@ -15,7 +15,7 @@ const usePassport = require('./config/passport')
 require('./config/mongoose')
 
 const app = express()
-const port = process.env.PORT
+const PORT = process.env.PORT
 
 app.engine('handlebars', exphbs({
    defaultLayout: 'main',
@@ -51,6 +51,6 @@ app.use((req, res, next) => {
 
 app.use(routes)
 
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log(`The project is running on http://localhost:${PORT}.`)
 })
