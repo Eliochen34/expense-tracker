@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const db = mongoose.connection
 const User = require('../user')
 const Record = require('../record')
+const Category = require('../category')
 
 
 mongoose.connect(process.env.MONGODB_URI, {
@@ -30,25 +31,25 @@ const SEED_RECORDS = [
     name: "早餐",
     date: "2022-11-2",
     amount: "55",
-    categoryId: "636344842e0a9d4b10449a09"
+    categoryId: "餐飲食品"
   },
   {
     name: "公車費",
     date: "2022-11-2",
     amount: 12,
-    categoryId: "636344842e0a9d4b10449a0a"
+    categoryId: "交通出行"
   },
   {
     name: "晚餐",
     date: "2022-11-2",
     amount: 300,
-    categoryId: "636344842e0a9d4b10449a09"
+    categoryId: "餐飲食品"
   },
   {
     name: "買傢俱",
     date: "2022-10-15",
     amount: 3500,
-    categoryId: "636344842e0a9d4b10449a07"
+    categoryId: "家居物業"
   }
 ]
 
@@ -59,25 +60,39 @@ db.on('error', () => {
 db.once('open', () => {
   console.log('running recordSeeder!')
   Promise.all(
-    SEED_USER.map(user => {
-      const { name, email, password } = user
-      return User.create({
-        name,
-        email,
-        password: bcrypt.hashSync(password, bcrypt.genSaltSync(10), null)
+    Category.find()
+      .then(categories => {
+        SEED_RECORDS.forEach(seedRecord => {
+          seedRecord.categoryId = categories.find(category => category.name === seedRecord.categoryId)._id
+        })
       })
-      .then(user => {
-        const userId = user._id
-        return Promise.all(
-          SEED_RECORDS.map(record => {
-            return Record.create({
-              ...record,
-              userId
+      .then(
+        Promise.all(
+          SEED_USER.map(user => {
+            const { name, email, password } = user
+            User.create({
+              name,
+              email,
+              password: bcrypt.hashSync(password, bcrypt.genSaltSync(10), null)
+            })
+            .then(user => {
+              console.log('xxxxxxxx')
+              const userId = user._id
+              SEED_RECORDS.map(record => {
+                const { name, date, amount, categoryId } = record
+                console.log('oooooooooooo')
+                return Record.create({
+                  name,
+                  date,
+                  amount,
+                  categoryId,
+                  userId
+                })
+              })
             })
           })
         )
-      })
-    })
+      )
   )
   .then(() => {
     console.log('recordSeeder is done!')

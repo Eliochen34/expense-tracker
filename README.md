@@ -22,15 +22,20 @@ Here lists the specific expense lists of login account
   ```
     npm run seed
   ```
-5. Start to run the project.
+5. Login with the seed users with seed user account.
+  ```
+    Account: seedUser@example.com
+    Password: 12345678
+  ```
+6. Start to run the project.
   ```
     npm run start
   ```
-6. It will be runninng successfully if the message shows below.
+7. It will be runninng successfully if the message shows below.
   ```
     The restaurant list project is running on the http:localhost:3000.
   ```
-7. Stop the process.
+8. Stop the process.
   ```
     CTRL + C
   ```
