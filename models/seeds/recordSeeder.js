@@ -59,7 +59,7 @@ db.on('error', () => {
 
 db.once('open', () => {
   console.log('running recordSeeder!')
-  Promise.all(
+  
     Category.find()
       .then(categories => {
         SEED_RECORDS.forEach(seedRecord => {
@@ -76,11 +76,9 @@ db.once('open', () => {
               password: bcrypt.hashSync(password, bcrypt.genSaltSync(10), null)
             })
             .then(user => {
-              console.log('xxxxxxxx')
               const userId = user._id
               SEED_RECORDS.map(record => {
                 const { name, date, amount, categoryId } = record
-                console.log('oooooooooooo')
                 return Record.create({
                   name,
                   date,
@@ -92,12 +90,11 @@ db.once('open', () => {
             })
           })
         )
+        .then(() => {
+          console.log('recordSeeder is done!')
+          // process.exit()
+        })
       )
-  )
-  .then(() => {
-    console.log('recordSeeder is done!')
-    process.exit()
-  })
   .catch(err => console.log(err))
   .finally(() => db.close)
 })
