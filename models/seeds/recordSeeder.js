@@ -66,35 +66,34 @@ db.once('open', () => {
           seedRecord.categoryId = categories.find(category => category.name === seedRecord.categoryId)._id
         })
       })
-      .then(
+      .then(() => {
         Promise.all(
           SEED_USER.map(user => {
             const { name, email, password } = user
-            User.create({
+            return User.create({
               name,
               email,
               password: bcrypt.hashSync(password, bcrypt.genSaltSync(10), null)
             })
-            .then(user => {
-              const userId = user._id
-              SEED_RECORDS.map(record => {
-                const { name, date, amount, categoryId } = record
-                return Record.create({
-                  name,
-                  date,
-                  amount,
-                  categoryId,
-                  userId
+              .then((user) => {
+                // const userId = user._id
+                console.log('user create!')
+                const records = []
+                SEED_RECORDS.map(seedRecord => {
+                  // const { name, date, amount, categoryId } = record
+                  seedRecord.userId = user._id
+                  records.push(seedRecord)
                 })
+                return Record.create(records)
               })
-            })
           })
         )
-        .then(() => {
-          console.log('recordSeeder is done!')
-          // process.exit()
-        })
-      )
+          .then(() => {
+            console.log('recordSeeder is done!')
+            process.exit()
+          })
+      })
+
   .catch(err => console.log(err))
   .finally(() => db.close)
 })
