@@ -2,7 +2,15 @@ const express = require('express')
 const router = express.Router()
 const Records = require('../../models/record')
 const Category = require('../../models/category')
-// const sorting = require('../../utility/sorting')
+const caculateTotalAmount = require('../../utility/caculate')
+
+// function caculateTotalAmount(records){
+//   let totalAmount = 0
+//   records.forEach(record => {
+//     totalAmount += record.amount
+//   })
+//   return totalAmount
+// }
 
 router.get('/', (req, res) => {
   const userId = req.user._id
@@ -17,11 +25,12 @@ router.get('/', (req, res) => {
         .lean()
         // .sort(sorting(req.query.sort))
         .then(records => {
-          let totalAmount = 0
-          for (let i = 0; i < records.length; i++) {
-            totalAmount += records[i].amount
-          }
-          res.render('index', { records, totalAmount, categories })
+          // let totalAmount = 0
+          // records.forEach(record => {
+          //   totalAmount += record.amount
+          // })
+          let totalAmountRender = caculateTotalAmount(records)
+          res.render('index', { records, totalAmountRender, categories })
         })
         .catch(err => {
           console.log(err)
@@ -42,11 +51,8 @@ router.post('/category', (req, res) => {
         .populate('categoryId')
         .lean()
         .then(records => {
-          let totalAmount = 0
-          for (let i = 0; i < records.length; i++) {
-            totalAmount += records[i].amount
-          }
-          res.render('index', { records, totalAmount, categories })
+          let totalAmountRender = caculateTotalAmount(records)
+          res.render('index', { records, totalAmountRender, categories })
         })
         .catch(err => {
           console.log(err)
@@ -55,25 +61,5 @@ router.post('/category', (req, res) => {
     })
 }) 
 
-// 關鍵字搜索餐廳
-// router.get('/search', (req, res) => {
-//   if (!req.query.keyword) {
-//     res.redirect('/')
-//   }
-//   const keyword = req.query.keyword
-//   Restaurant.find({})
-//     .lean()
-//     .then(restaurants => {
-//       const filteredRestaurants = restaurants.filter(
-//         restaurant => restaurant.name.toLowerCase().includes(keyword) ||
-//           restaurant.category.includes(keyword)
-//       )
-//       res.render('index', { restaurants: filteredRestaurants, keyword })
-//     })
-//     .catch(err => {
-//       console.log(err)
-//       res.render('error')
-//     })
-// })
 
 module.exports = router
